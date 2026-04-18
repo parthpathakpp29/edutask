@@ -110,7 +110,7 @@ GROQ_MODEL=
 ## Deployment
 
 - **Live App**: _Add your deployed URL here_
-- **Repository**:[ _Add your GitHub repository URL here_](https://github.com/parthpathakpp29/edutask/)
+- **Repository**:[ Github Repo_](https://github.com/parthpathakpp29/edutask/)
 
 Recommended hosting: Vercel with PostgreSQL (or Supabase Postgres).
 

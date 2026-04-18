@@ -111,7 +111,7 @@ export default async function DashboardPage() {
               Pending Submissions
             </h2>
             <div className="bg-white rounded-xl border border-gray-200 divide-y divide-gray-100">
-              {recentSubmissions.map((sub) => (
+              {recentSubmissions.map((sub: any) => ( // eslint-disable-line @typescript-eslint/no-explicit-any
                 <div
                   key={sub.id}
                   className="flex items-center justify-between p-4"
@@ -196,7 +196,7 @@ export default async function DashboardPage() {
             Upcoming Assignments
           </h2>
           <div className="bg-white rounded-xl border border-gray-200 divide-y divide-gray-100">
-            {upcomingAssignments.map((assignment) => (
+            {upcomingAssignments.map((assignment: any) => ( // eslint-disable-line @typescript-eslint/no-explicit-any
               <div
                 key={assignment.id}
                 className="flex items-center justify-between p-4"

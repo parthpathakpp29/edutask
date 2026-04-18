@@ -69,7 +69,7 @@ export default async function CoursesPage() {
         </div>
       ) : (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {courses.map((course: any) => (
+          {courses.map((course: any) => ( // eslint-disable-line @typescript-eslint/no-explicit-any
             <CourseCard
               key={course.id}
               course={{

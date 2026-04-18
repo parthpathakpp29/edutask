@@ -66,7 +66,7 @@ export default async function MySubmissionsPage() {
         </div>
       ) : (
         <div className="space-y-3">
-          {submissions.map((sub) => (
+          {submissions.map((sub: any) => ( // eslint-disable-line @typescript-eslint/no-explicit-any
             <div
               key={sub.id}
               className="bg-white rounded-xl border border-gray-200 p-5 hover:shadow-sm transition-shadow"

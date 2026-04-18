@@ -98,7 +98,7 @@ export default function RegisterForm() {
 
             {/* Role selection */}
             <div className="space-y-3 pt-2">
-              <Label className="text-sm font-semibold text-white">What's your role?</Label>
+              <Label className="text-sm font-semibold text-white">What&apos;s your role?</Label>
               <div className="grid grid-cols-2 gap-3">
                 {/* Student option */}
                 <label className="relative flex cursor-pointer group">

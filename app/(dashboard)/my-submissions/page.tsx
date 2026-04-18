@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import { CheckCircle, Clock, RotateCcw, FileText } from "lucide-react"
+import type { Prisma } from "@prisma/client"
 
 export const metadata = { title: "My Submissions — EduTask" }
 
@@ -32,15 +33,17 @@ export default async function MySubmissionsPage() {
   // This page is only for students
   if (!session || session.user.role !== "STUDENT") redirect("/dashboard")
 
-  const submissions = await prisma.submission.findMany({
+  const submissionArgs = {
     where: { studentId: session.user.id },
     include: {
       assignment: {
         include: { course: { select: { id: true, title: true } } },
       },
     },
-    orderBy: { submittedAt: "desc" },
-  })
+    orderBy: { submittedAt: "desc" as const },
+  } satisfies Prisma.SubmissionFindManyArgs
+
+  const submissions = await prisma.submission.findMany(submissionArgs)
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">

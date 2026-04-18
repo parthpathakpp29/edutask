@@ -4,6 +4,7 @@ import { redirect } from "next/navigation"
 import StatsCard from "@/components/dashboard/stats-card"
 import Link from "next/link"
 import { BookOpen, FileText, Clock, CheckCircle, Plus } from "lucide-react"
+import type { Prisma } from "@prisma/client"
 
 export const metadata = { title: "Dashboard — EduTask" }
 
@@ -35,18 +36,21 @@ export default async function DashboardPage() {
     ])
 
     // Recent ungraded submissions to show in the list
-    const recentSubmissions = await prisma.submission.findMany({
+    // Define the query args so TypeScript can properly infer the return type
+    const recentSubArgs = {
       where: {
-        status: "SUBMITTED",
+        status: "SUBMITTED" as const,
         assignment: { course: { instructorId: session.user.id } },
       },
       include: {
         student: { select: { name: true } },
         assignment: { select: { title: true, courseId: true } },
       },
-      orderBy: { submittedAt: "desc" },
+      orderBy: { submittedAt: "desc" as const },
       take: 5,
-    })
+    } satisfies Prisma.SubmissionFindManyArgs
+
+    const recentSubmissions = await prisma.submission.findMany(recentSubArgs)
 
     return (
       <div className="max-w-5xl mx-auto space-y-8">
@@ -152,12 +156,14 @@ export default async function DashboardPage() {
   ])
 
   // Upcoming assignments (due in the future)
-  const upcomingAssignments = await prisma.assignment.findMany({
+  const upcomingArgs = {
     where: { dueDate: { gt: new Date() } },
     include: { course: { select: { title: true } } },
-    orderBy: { dueDate: "asc" },
+    orderBy: { dueDate: "asc" as const },
     take: 5,
-  })
+  } satisfies Prisma.AssignmentFindManyArgs
+
+  const upcomingAssignments = await prisma.assignment.findMany(upcomingArgs)
 
   return (
     <div className="max-w-5xl mx-auto space-y-8">

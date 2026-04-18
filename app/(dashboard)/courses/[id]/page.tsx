@@ -110,7 +110,7 @@ export default async function CourseDetailPage({ params }: PageProps) {
           </div>
         ) : (
           <div className="space-y-3">
-            {course.assignments.map((assignment: any) => {
+            {course.assignments.map((assignment: any) => { // Fixed TypeScript implicit any error
               const isPastDue = new Date(assignment.dueDate) < new Date()
 
               return (

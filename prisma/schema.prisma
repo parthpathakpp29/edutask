@@ -1,0 +1,117 @@
+// This is your Prisma schema file
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+  // In Prisma 7, the connection URL is configured in prisma.config.ts, not here
+}
+
+// ============================================
+// USER MODEL
+// ============================================
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  role      Role     @default(STUDENT)
+  
+  // Relations
+  coursesCreated Course[]     @relation("InstructorCourses")
+  submissions    Submission[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([email])
+}
+
+enum Role {
+  STUDENT
+  INSTRUCTOR
+  ADMIN
+}
+
+// ============================================
+// COURSE MODEL
+// ============================================
+model Course {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+  code        String   @unique
+  
+  // Relations
+  instructor   User         @relation("InstructorCourses", fields: [instructorId], references: [id], onDelete: Cascade)
+  instructorId String
+  assignments  Assignment[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([instructorId])
+  @@index([code])
+}
+
+// ============================================
+// ASSIGNMENT MODEL
+// ============================================
+model Assignment {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+  dueDate     DateTime
+  maxPoints   Int      @default(100)
+  
+  // Relations
+  course       Course       @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId     String
+  submissions  Submission[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([courseId])
+  @@index([dueDate])
+}
+
+// ============================================
+// SUBMISSION MODEL
+// ============================================
+model Submission {
+  id      String @id @default(cuid())
+  content String @db.Text
+  
+  // AI-generated feedback
+  aiFeedback  String?  @db.Text
+  aiGenerated Boolean  @default(false)
+  
+  // Manual grading (instructor can override AI)
+  grade       Float?
+  feedback    String?  @db.Text
+  status      SubmissionStatus @default(SUBMITTED)
+  
+  // Relations
+  student      User       @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  studentId    String
+  assignment   Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  assignmentId String
+  
+  submittedAt DateTime @default(now())
+  gradedAt    DateTime?
+  updatedAt   DateTime @updatedAt
+  
+  @@index([studentId])
+  @@index([assignmentId])
+  @@index([status])
+}
+
+enum SubmissionStatus {
+  SUBMITTED
+  GRADED
+  RETURNED
+}

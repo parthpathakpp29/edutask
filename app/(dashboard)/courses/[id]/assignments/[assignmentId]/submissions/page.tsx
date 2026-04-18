@@ -85,7 +85,7 @@ export default async function SubmissionsPage({ params }: PageProps) {
         </div>
       ) : (
         <div className="space-y-4">
-          {submissions.map((sub) => (
+          {submissions.map((sub: (typeof submissions)[number]) => (
             <div
               key={sub.id}
               className="bg-white rounded-xl border border-gray-200 p-6"

@@ -29,7 +29,7 @@ export default function AssignmentForm({
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
-  // Format the date for the datetime-local input (requires "YYYY-MM-DDTHH:MM" format)
+
   const defaultDueDate = initialData?.dueDate
     ? new Date(initialData.dueDate).toISOString().slice(0, 16)
     : ""
@@ -66,7 +66,7 @@ export default function AssignmentForm({
         return
       }
 
-      // Go back to the course page
+
       router.push(`/courses/${courseId}`)
       router.refresh()
     } catch {

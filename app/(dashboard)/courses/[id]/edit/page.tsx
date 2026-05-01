@@ -19,7 +19,7 @@ export default async function EditCoursePage({ params }: PageProps) {
 
   if (!course) notFound()
 
-  // Only the course owner can edit it
+
   if (course.instructorId !== session.user.id) redirect("/courses")
 
   return (

@@ -4,10 +4,10 @@ import { prisma } from "@/lib/prisma"
 import { courseSchema } from "@/lib/validations"
 import { ZodError } from "zod"
 
-// In Next.js 16, dynamic route params are a Promise and must be awaited
+
 type Params = { params: Promise<{ id: string }> }
 
-// GET /api/courses/:id — Get a single course with its assignments
+
 export async function GET(req: Request, { params }: Params) {
   try {
     const session = await auth()
@@ -33,12 +33,12 @@ export async function GET(req: Request, { params }: Params) {
     }
 
     return NextResponse.json(course)
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Failed to fetch course" }, { status: 500 })
   }
 }
 
-// PUT /api/courses/:id — Update a course (only the instructor who owns it)
+
 export async function PUT(req: Request, { params }: Params) {
   try {
     const session = await auth()
@@ -50,7 +50,7 @@ export async function PUT(req: Request, { params }: Params) {
     const body = await req.json()
     const data = courseSchema.parse(body)
 
-    // Make sure the course exists and belongs to this instructor
+
     const course = await prisma.course.findUnique({ where: { id } })
     if (!course) {
       return NextResponse.json({ error: "Course not found" }, { status: 404 })
@@ -75,7 +75,7 @@ export async function PUT(req: Request, { params }: Params) {
   }
 }
 
-// DELETE /api/courses/:id — Delete a course (only the instructor who owns it)
+
 export async function DELETE(req: Request, { params }: Params) {
   try {
     const session = await auth()
@@ -96,10 +96,9 @@ export async function DELETE(req: Request, { params }: Params) {
       )
     }
 
-    // Cascade delete is configured in the schema (assignments + submissions delete too)
     await prisma.course.delete({ where: { id } })
     return NextResponse.json({ message: "Course deleted successfully" })
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Failed to delete course" }, { status: 500 })
   }
 }

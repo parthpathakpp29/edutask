@@ -6,7 +6,7 @@ import { ZodError } from "zod"
 
 type Params = { params: Promise<{ id: string }> }
 
-// GET /api/assignments/:id — Get a single assignment with submission count
+
 export async function GET(req: Request, { params }: Params) {
   try {
     const session = await auth()
@@ -31,7 +31,7 @@ export async function GET(req: Request, { params }: Params) {
     }
 
     return NextResponse.json(assignment)
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch assignment" },
       { status: 500 }
@@ -39,7 +39,7 @@ export async function GET(req: Request, { params }: Params) {
   }
 }
 
-// PUT /api/assignments/:id — Update an assignment (instructor owner only)
+
 export async function PUT(req: Request, { params }: Params) {
   try {
     const session = await auth()
@@ -88,7 +88,7 @@ export async function PUT(req: Request, { params }: Params) {
   }
 }
 
-// DELETE /api/assignments/:id
+
 export async function DELETE(req: Request, { params }: Params) {
   try {
     const session = await auth()
@@ -112,7 +112,7 @@ export async function DELETE(req: Request, { params }: Params) {
 
     await prisma.assignment.delete({ where: { id } })
     return NextResponse.json({ message: "Assignment deleted" })
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to delete assignment" },
       { status: 500 }

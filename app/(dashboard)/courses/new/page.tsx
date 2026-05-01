@@ -7,7 +7,7 @@ export const metadata = { title: "New Course — EduTask" }
 export default async function NewCoursePage() {
   const session = await auth()
 
-  // Only instructors can create courses
+
   if (!session || session.user.role !== "INSTRUCTOR") {
     redirect("/dashboard")
   }

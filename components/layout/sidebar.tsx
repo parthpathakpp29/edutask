@@ -16,7 +16,7 @@ interface SidebarProps {
 export default function Sidebar({ role }: SidebarProps) {
   const pathname = usePathname()
 
-  // Navigation links — students don't need "My Courses" (they see all)
+
   const navItems = [
     {
       href: "/dashboard",
@@ -28,7 +28,7 @@ export default function Sidebar({ role }: SidebarProps) {
       label: role === "INSTRUCTOR" ? "My Courses" : "All Courses",
       icon: BookOpen,
     },
-    // Students have a separate "My Submissions" page
+
     ...(role === "STUDENT"
       ? [{ href: "/my-submissions", label: "My Submissions", icon: FileText }]
       : []),
@@ -36,7 +36,7 @@ export default function Sidebar({ role }: SidebarProps) {
 
   return (
     <aside className="w-64 bg-slate-900 text-white flex flex-col shrink-0">
-      {/* Logo */}
+
       <div className="p-6 border-b border-slate-700/50">
         <Link href="/dashboard" className="flex items-center gap-2">
           <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
@@ -46,10 +46,9 @@ export default function Sidebar({ role }: SidebarProps) {
         </Link>
       </div>
 
-      {/* Navigation */}
+
       <nav className="flex-1 p-4 space-y-1">
         {navItems.map((item) => {
-          // Check if this link is currently active
           const isActive =
             pathname === item.href || pathname.startsWith(item.href + "/")
 
@@ -70,7 +69,7 @@ export default function Sidebar({ role }: SidebarProps) {
         })}
       </nav>
 
-      {/* Role badge at the bottom */}
+
       <div className="p-4 border-t border-slate-700/50">
         <div
           className={`text-xs font-medium px-3 py-1.5 rounded-full inline-block ${

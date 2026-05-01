@@ -14,19 +14,19 @@ export default async function DashboardPage() {
 
   const isInstructor = session.user.role === "INSTRUCTOR"
 
-  // ─── Fetch stats based on role ────────────────────────────────────────
+
   if (isInstructor) {
-    // Instructor stats
+
     const [courseCount, assignmentCount, pendingCount] = await Promise.all([
-      // How many courses this instructor has created
+
       prisma.course.count({
         where: { instructorId: session.user.id },
       }),
-      // How many assignments across all their courses
+
       prisma.assignment.count({
         where: { course: { instructorId: session.user.id } },
       }),
-      // How many submissions are waiting to be graded
+
       prisma.submission.count({
         where: {
           status: "SUBMITTED",
@@ -59,7 +59,7 @@ export default async function DashboardPage() {
           </p>
         </div>
 
-        {/* Stats */}
+
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <StatsCard
             label="My Courses"
@@ -82,7 +82,7 @@ export default async function DashboardPage() {
           />
         </div>
 
-        {/* Quick actions */}
+
         <div>
           <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
             Quick Actions
@@ -104,7 +104,7 @@ export default async function DashboardPage() {
           </div>
         </div>
 
-        {/* Recent pending submissions */}
+
         {recentSubmissions.length > 0 && (
           <div>
             <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
@@ -139,13 +139,13 @@ export default async function DashboardPage() {
     )
   }
 
-  // ─── Student Dashboard ────────────────────────────────────────────────
+
   const [courseCount, submissionCount, gradedCount] = await Promise.all([
-    // Students see all courses
+
     prisma.course.count(),
-    // Student's total submissions
+
     prisma.submission.count({ where: { studentId: session.user.id } }),
-    // Student's graded submissions
+
     prisma.submission.count({
       where: { studentId: session.user.id, status: "GRADED" },
     }),
@@ -167,7 +167,7 @@ export default async function DashboardPage() {
         <p className="text-gray-500 mt-1">Track your courses and assignments.</p>
       </div>
 
-      {/* Stats */}
+
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <StatsCard
           label="Available Courses"
@@ -189,7 +189,7 @@ export default async function DashboardPage() {
         />
       </div>
 
-      {/* Upcoming assignments */}
+
       {upcomingAssignments.length > 0 && (
         <div>
           <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">

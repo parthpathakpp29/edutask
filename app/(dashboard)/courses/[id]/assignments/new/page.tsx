@@ -15,7 +15,7 @@ export default async function NewAssignmentPage({ params }: PageProps) {
 
   const { id: courseId } = await params
 
-  // Verify the course exists and belongs to this instructor
+
   const course = await prisma.course.findUnique({ where: { id: courseId } })
   if (!course) notFound()
   if (course.instructorId !== session.user.id) redirect(`/courses/${courseId}`)

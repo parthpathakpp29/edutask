@@ -35,7 +35,7 @@ export default async function CourseDetailPage({ params }: PageProps) {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
-      {/* Back link */}
+
       <Link
         href="/courses"
         className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 transition-colors"
@@ -44,7 +44,7 @@ export default async function CourseDetailPage({ params }: PageProps) {
         Back to courses
       </Link>
 
-      {/* Course header */}
+
       <div className="bg-white rounded-xl border border-gray-200 p-6">
         <div className="flex items-start justify-between mb-4">
           <div>
@@ -59,7 +59,7 @@ export default async function CourseDetailPage({ params }: PageProps) {
             </p>
           </div>
 
-          {/* Edit / delete buttons — only for the course owner */}
+
           {isOwner && (
             <div className="flex gap-2">
               <Link
@@ -77,14 +77,14 @@ export default async function CourseDetailPage({ params }: PageProps) {
         <p className="text-gray-700 whitespace-pre-wrap">{course.description}</p>
       </div>
 
-      {/* Assignments section */}
+
       <div>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-gray-900">
             Assignments ({course.assignments.length})
           </h2>
 
-          {/* Only the course owner can add assignments */}
+
           {isOwner && (
             <Link
               href={`/courses/${id}/assignments/new`}

@@ -57,7 +57,7 @@ export default function GradeForm({ submission }: GradeFormProps) {
       }
 
       setSuccess(true)
-      router.refresh() // Re-fetch the page to show updated status
+      router.refresh()
     } catch {
       setError("Network error. Please try again.")
     } finally {

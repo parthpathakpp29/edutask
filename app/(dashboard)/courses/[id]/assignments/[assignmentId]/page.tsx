@@ -31,7 +31,7 @@ export default async function AssignmentDetailPage({ params }: PageProps) {
     session.user.role === "INSTRUCTOR" &&
     assignment.course.instructorId === session.user.id
 
-  // For students: check if they already submitted
+
   let existingSubmission = null
   if (session.user.role === "STUDENT") {
     existingSubmission = await prisma.submission.findFirst({
@@ -51,7 +51,7 @@ export default async function AssignmentDetailPage({ params }: PageProps) {
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
-      {/* Back link */}
+
       <Link
         href={`/courses/${courseId}`}
         className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 transition-colors"
@@ -60,7 +60,7 @@ export default async function AssignmentDetailPage({ params }: PageProps) {
         Back to {assignment.course.title}
       </Link>
 
-      {/* Assignment details */}
+
       <div className="bg-white rounded-xl border border-gray-200 p-6">
         <h1 className="text-2xl font-bold text-gray-900 mb-4">
           {assignment.title}
@@ -101,7 +101,7 @@ export default async function AssignmentDetailPage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* Instructor controls */}
+
       {isOwner && (
         <div className="bg-white rounded-xl border border-gray-200 p-6">
           <h2 className="font-semibold text-gray-900 mb-4">Instructor Actions</h2>
@@ -125,7 +125,7 @@ export default async function AssignmentDetailPage({ params }: PageProps) {
         </div>
       )}
 
-      {/* Student submission form */}
+
       {session.user.role === "STUDENT" && (
         <div className="bg-white rounded-xl border border-gray-200 p-6">
           <h2 className="font-semibold text-gray-900 mb-4">Your Submission</h2>

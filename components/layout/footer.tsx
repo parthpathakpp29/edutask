@@ -1,6 +1,6 @@
 import { GraduationCap } from "lucide-react"
 
-// GitHub and LinkedIn icons as inline SVGs (lucide-react v1 removed social icons)
+
 function GitHubIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
@@ -21,7 +21,7 @@ export default function Footer() {
   return (
     <footer className="bg-slate-900 text-slate-400 py-10">
       <div className="max-w-6xl mx-auto px-6 flex flex-col items-center gap-4 text-center">
-        {/* Logo */}
+
         <div className="flex items-center gap-2 text-white">
           <GraduationCap className="w-5 h-5 text-indigo-400" />
           <span className="font-bold">EduTask</span>
@@ -32,7 +32,7 @@ export default function Footer() {
           PostgreSQL
         </p>
 
-        {/* Required by the assessment: name + GitHub + LinkedIn */}
+
         <div className="flex items-center gap-6 text-sm">
           <span className="text-white font-medium">Built by Parth Patak</span>
 

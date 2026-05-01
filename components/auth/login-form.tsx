@@ -18,12 +18,12 @@ export default function LoginForm({
   return (
     <div className="w-full max-w-md">
       <div className="relative">
-        {/* Animated background glow */}
+
         <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/20 to-purple-600/20 rounded-2xl blur-2xl" />
 
-        {/* Form container */}
+
         <div className="relative bg-slate-900/80 backdrop-blur border border-slate-700/50 rounded-2xl p-8">
-          {/* Header */}
+
           <div className="text-center mb-8">
             <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center mx-auto mb-4">
               <Lock className="w-6 h-6 text-white" />
@@ -32,7 +32,7 @@ export default function LoginForm({
             <p className="text-slate-400 mt-2">Sign in to your EduTask account</p>
           </div>
 
-          {/* Success message */}
+
           {registeredSuccess && (
             <div className="mb-6 flex items-start gap-3 p-4 rounded-xl border border-green-500/30 bg-green-500/10">
               <CheckCircle className="w-5 h-5 text-green-400 shrink-0 mt-0.5" />
@@ -40,7 +40,7 @@ export default function LoginForm({
             </div>
           )}
 
-          {/* Error message */}
+
           {error && (
             <div className="mb-6 flex items-start gap-3 p-4 rounded-xl border border-red-500/30 bg-red-500/10">
               <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
@@ -48,7 +48,7 @@ export default function LoginForm({
             </div>
           )}
 
-          {/* Form */}
+
           <form action={action} className="space-y-5">
             <div className="space-y-2.5">
               <Label htmlFor="email" className="text-sm font-semibold text-white">
@@ -107,14 +107,14 @@ export default function LoginForm({
             </Button>
           </form>
 
-          {/* Divider */}
+
           <div className="my-6 flex items-center gap-3">
             <div className="flex-1 h-px bg-slate-700" />
             <span className="text-xs text-slate-500">New to EduTask?</span>
             <div className="flex-1 h-px bg-slate-700" />
           </div>
 
-          {/* Sign up link */}
+
           <p className="text-center text-sm text-slate-400">
             Don&apos;t have an account?{" "}
             <Link href="/register" className="text-indigo-400 font-semibold hover:text-indigo-300 transition-colors">

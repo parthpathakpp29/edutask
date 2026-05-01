@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { AlertCircle, CheckCircle } from "lucide-react"
+import { AlertCircle } from "lucide-react"
 
 interface CourseFormProps {
-  // When editing, we pre-fill the form with existing data
+
   initialData?: {
     id: string
     title: string
@@ -30,12 +30,12 @@ export default function CourseForm({ initialData }: CourseFormProps) {
     setError("")
     setIsLoading(true)
 
-    // Read field values from the form
+
     const formData = new FormData(e.currentTarget)
     const data = {
       title: formData.get("title") as string,
       description: formData.get("description") as string,
-      code: (formData.get("code") as string).toUpperCase(), // Always uppercase
+      code: (formData.get("code") as string).toUpperCase(),
     }
 
     try {
@@ -57,7 +57,7 @@ export default function CourseForm({ initialData }: CourseFormProps) {
       }
 
       const course = await res.json()
-      // Redirect to the course detail page after save
+
       router.push(`/courses/${course.id}`)
       router.refresh()
     } catch {

@@ -4,8 +4,7 @@ import { prisma } from "@/lib/prisma"
 
 type Params = { params: Promise<{ id: string }> }
 
-// POST /api/submissions/:id/ai-feedback
-// Generates AI draft feedback for instructors using Groq.
+
 export async function POST(req: Request, { params }: Params) {
   try {
     const session = await auth()

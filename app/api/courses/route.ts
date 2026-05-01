@@ -4,9 +4,7 @@ import { prisma } from "@/lib/prisma"
 import { courseSchema } from "@/lib/validations"
 import { ZodError } from "zod"
 
-// GET /api/courses
-// - Instructors: see only their own courses
-// - Students: see all available courses
+
 export async function GET() {
   try {
     const session = await auth()
@@ -29,12 +27,15 @@ export async function GET() {
     })
 
     return NextResponse.json(courses)
-  } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch courses" }, { status: 500 })
+  } catch {
+    return NextResponse.json(
+      { error: "Failed to fetch courses" },
+      { status: 500 }
+    )
   }
 }
 
-// POST /api/courses — Create a new course (instructors only)
+
 export async function POST(req: Request) {
   try {
     const session = await auth()

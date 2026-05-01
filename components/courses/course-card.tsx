@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { BookOpen, Users, Clock } from "lucide-react"
+import { BookOpen, Users } from "lucide-react"
 
 interface CourseCardProps {
   course: {
@@ -17,7 +17,7 @@ interface CourseCardProps {
 export default function CourseCard({ course, role }: CourseCardProps) {
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-5 hover:shadow-md transition-shadow">
-      {/* Course code badge */}
+
       <div className="flex items-start justify-between mb-3">
         <span className="text-xs font-mono font-semibold bg-indigo-100 text-indigo-700 px-2 py-1 rounded">
           {course.code}
@@ -28,13 +28,13 @@ export default function CourseCard({ course, role }: CourseCardProps) {
         </span>
       </div>
 
-      {/* Title + description */}
+
       <h3 className="font-semibold text-gray-900 mb-1">{course.title}</h3>
       <p className="text-sm text-gray-500 line-clamp-2 mb-4">
         {course.description}
       </p>
 
-      {/* Instructor info (shown to students) */}
+
       {role === "STUDENT" && (
         <div className="flex items-center gap-1.5 text-xs text-gray-500 mb-4">
           <Users className="w-3.5 h-3.5" />
@@ -42,7 +42,7 @@ export default function CourseCard({ course, role }: CourseCardProps) {
         </div>
       )}
 
-      {/* View button */}
+
       <Link
         href={`/courses/${course.id}`}
         className="block text-center text-sm font-medium bg-indigo-50 hover:bg-indigo-100 text-indigo-600 px-4 py-2 rounded-lg transition-colors"

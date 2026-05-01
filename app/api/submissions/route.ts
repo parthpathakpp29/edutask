@@ -4,9 +4,7 @@ import { prisma } from "@/lib/prisma"
 import { submissionSchema } from "@/lib/validations"
 import { ZodError } from "zod"
 
-// GET /api/submissions
-// - Students: see only their own submissions (filter by assignmentId is optional)
-// - Instructors: see all submissions for a specific assignment (?assignmentId=xxx)
+
 export async function GET(req: Request) {
   try {
     const session = await auth()
@@ -17,13 +15,13 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url)
     const assignmentId = searchParams.get("assignmentId")
 
-    // Build the query filter based on role
+
     const where: Record<string, string> = {}
     if (session.user.role === "STUDENT") {
-      where.studentId = session.user.id // Students only see their own
+      where.studentId = session.user.id
       if (assignmentId) where.assignmentId = assignmentId
     } else if (assignmentId) {
-      where.assignmentId = assignmentId // Instructors filter by assignment
+      where.assignmentId = assignmentId
     }
 
     const submissions = await prisma.submission.findMany({
@@ -38,7 +36,7 @@ export async function GET(req: Request) {
     })
 
     return NextResponse.json(submissions)
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch submissions" },
       { status: 500 }
@@ -46,7 +44,7 @@ export async function GET(req: Request) {
   }
 }
 
-// POST /api/submissions — Students submit their work
+
 export async function POST(req: Request) {
   try {
     const session = await auth()
@@ -60,7 +58,7 @@ export async function POST(req: Request) {
     const body = await req.json()
     const data = submissionSchema.parse(body)
 
-    // Prevent duplicate submissions for the same assignment
+
     const existing = await prisma.submission.findFirst({
       where: {
         studentId: session.user.id,

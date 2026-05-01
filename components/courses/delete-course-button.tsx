@@ -9,7 +9,7 @@ export default function DeleteCourseButton({ courseId }: { courseId: string }) {
   const [isLoading, setIsLoading] = useState(false)
 
   async function handleDelete() {
-    // Ask the user to confirm before deleting
+
     const confirmed = window.confirm(
       "Are you sure you want to delete this course? This will also delete all assignments and submissions."
     )

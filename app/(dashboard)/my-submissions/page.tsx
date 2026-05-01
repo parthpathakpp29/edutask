@@ -2,7 +2,7 @@ import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import Link from "next/link"
-import { CheckCircle, Clock, RotateCcw, FileText } from "lucide-react"
+import { FileText } from "lucide-react"
 
 
 export const metadata = { title: "My Submissions — EduTask" }
@@ -30,7 +30,7 @@ function StatusBadge({ status }: { status: string }) {
 export default async function MySubmissionsPage() {
   const session = await auth()
 
-  // This page is only for students
+
   if (!session || session.user.role !== "STUDENT") redirect("/dashboard")
 
   const submissions = await prisma.submission.findMany({
@@ -91,7 +91,7 @@ export default async function MySubmissionsPage() {
 
                 <div className="flex flex-col items-end gap-2 shrink-0 ml-4">
                   <StatusBadge status={sub.status} />
-                  {/* Show grade if graded */}
+
                   {sub.grade !== null && (
                     <span className="text-sm font-bold text-indigo-600">
                       {sub.grade} / {sub.assignment.maxPoints} pts
@@ -100,7 +100,7 @@ export default async function MySubmissionsPage() {
                 </div>
               </div>
 
-              {/* Show feedback if available */}
+
               {sub.feedback && (
                 <div className="mt-3 p-3 bg-indigo-50 border border-indigo-100 rounded-lg text-sm text-indigo-700">
                   <strong>Feedback:</strong> {sub.feedback}

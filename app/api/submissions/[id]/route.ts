@@ -6,7 +6,7 @@ import { ZodError } from "zod"
 
 type Params = { params: Promise<{ id: string }> }
 
-// GET /api/submissions/:id — View a single submission
+
 export async function GET(req: Request, { params }: Params) {
   try {
     const session = await auth()
@@ -32,7 +32,7 @@ export async function GET(req: Request, { params }: Params) {
       return NextResponse.json({ error: "Submission not found" }, { status: 404 })
     }
 
-    // A student can only view their own submission
+
     if (
       session.user.role === "STUDENT" &&
       submission.studentId !== session.user.id
@@ -41,7 +41,7 @@ export async function GET(req: Request, { params }: Params) {
     }
 
     return NextResponse.json(submission)
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch submission" },
       { status: 500 }
@@ -49,7 +49,7 @@ export async function GET(req: Request, { params }: Params) {
   }
 }
 
-// PUT /api/submissions/:id — Instructor grades a submission
+
 export async function PUT(req: Request, { params }: Params) {
   try {
     const session = await auth()
@@ -73,7 +73,7 @@ export async function PUT(req: Request, { params }: Params) {
       return NextResponse.json({ error: "Submission not found" }, { status: 404 })
     }
 
-    // Only the course instructor can grade submissions for that course
+
     if (submission.assignment.course.instructorId !== session.user.id) {
       return NextResponse.json({ error: "Access denied" }, { status: 403 })
     }

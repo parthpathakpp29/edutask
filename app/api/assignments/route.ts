@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma"
 import { assignmentSchema } from "@/lib/validations"
 import { ZodError } from "zod"
 
-// GET /api/assignments?courseId=xxx — Get assignments for a specific course
+
 export async function GET(req: Request) {
   try {
     const session = await auth()
@@ -25,7 +25,7 @@ export async function GET(req: Request) {
     })
 
     return NextResponse.json(assignments)
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch assignments" },
       { status: 500 }
@@ -33,7 +33,7 @@ export async function GET(req: Request) {
   }
 }
 
-// POST /api/assignments — Create an assignment (instructors only)
+
 export async function POST(req: Request) {
   try {
     const session = await auth()
@@ -47,7 +47,7 @@ export async function POST(req: Request) {
     const body = await req.json()
     const data = assignmentSchema.parse(body)
 
-    // Verify that the course belongs to this instructor
+
     const course = await prisma.course.findUnique({
       where: { id: data.courseId },
     })
@@ -62,7 +62,7 @@ export async function POST(req: Request) {
       data: {
         title: data.title,
         description: data.description,
-        dueDate: new Date(data.dueDate), // Convert ISO string to Date object
+        dueDate: new Date(data.dueDate),
         maxPoints: data.maxPoints,
         courseId: data.courseId,
       },

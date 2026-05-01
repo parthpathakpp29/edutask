@@ -9,7 +9,7 @@ import { AlertCircle, CheckCircle, Send } from "lucide-react"
 
 interface SubmissionFormProps {
   assignmentId: string
-  // If the student already submitted, show the existing content (read-only)
+
   existingSubmission?: {
     id: string
     content: string
@@ -27,7 +27,7 @@ export default function SubmissionForm({
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
-  // If already submitted, show the submitted content + result
+
   if (existingSubmission) {
     return (
       <div className="space-y-4">
@@ -43,7 +43,7 @@ export default function SubmissionForm({
           </div>
         </div>
 
-        {/* Show grade if it's been graded */}
+
         {existingSubmission.status !== "SUBMITTED" && (
           <div className="p-4 bg-indigo-50 border border-indigo-200 rounded-xl space-y-2">
             <p className="text-sm font-semibold text-indigo-700">
@@ -84,7 +84,7 @@ export default function SubmissionForm({
         return
       }
 
-      // Refresh the page to show the submitted state
+
       router.refresh()
     } catch {
       setError("Network error. Please try again.")

@@ -13,7 +13,7 @@ export default async function CoursesPage() {
 
   const isInstructor = session.user.role === "INSTRUCTOR"
 
-  // Instructors see only their courses; students see all
+
   const courses = await prisma.course.findMany({
     where: isInstructor ? { instructorId: session.user.id } : {},
     include: {

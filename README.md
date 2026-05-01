@@ -109,7 +109,11 @@ GROQ_MODEL=
 
 ## Deployment
 
+<<<<<<< HEAD
 - **Live App**: [https://edutask-zeta.vercel.app/](https://edutask-zeta.vercel.app/)
+=======
+- **Live App**: [_Live Link](https://edutask-zeta.vercel.app/)
+>>>>>>> 8067bb82fdf2400f06e81492bc2175bf489ae66b
 - **Repository**:[ Github Repo_](https://github.com/parthpathakpp29/edutask/)
 
 Recommended hosting: Vercel with PostgreSQL (or Supabase Postgres).

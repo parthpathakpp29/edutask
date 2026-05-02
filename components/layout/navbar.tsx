@@ -39,7 +39,7 @@ export default function Navbar({ user }: NavbarProps) {
             type="submit"
             variant="ghost"
             size="sm"
-            className="text-gray-500 hover:text-gray-900"
+            className="text-gray-500 hover:text-gray-900 hover:bg-gray-100"
           >
             <LogOut className="w-4 h-4 mr-1.5" />
             Sign out

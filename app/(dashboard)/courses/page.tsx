@@ -5,17 +5,24 @@ import CourseCard from "@/components/courses/course-card"
 import Link from "next/link"
 import { Plus } from "lucide-react"
 
+
 export const metadata = { title: "Courses — EduTask" }
 
-export default async function CoursesPage() {
+export default async function CoursesPage({ searchParams, }: { searchParams: Promise<{ q?: string }> }) {
   const session = await auth()
   if (!session) redirect("/login")
 
   const isInstructor = session.user.role === "INSTRUCTOR"
 
 
+
+
   const courses = await prisma.course.findMany({
-    where: isInstructor ? { instructorId: session.user.id } : {},
+    where: {
+      ...(isInstructor ? { instructorId: session.user.id } : {}),
+
+
+    },
     include: {
       instructor: { select: { name: true, email: true } },
       _count: { select: { assignments: true } },
@@ -48,6 +55,7 @@ export default async function CoursesPage() {
             New Course
           </Link>
         )}
+
       </div>
 
       {/* Course list */}

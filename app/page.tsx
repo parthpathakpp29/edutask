@@ -4,7 +4,7 @@ import { BookOpen, FileText, Users, CheckCircle, Sparkles, ArrowRight } from "lu
 export default function LandingPage() {
   return (
     <div className="min-h-screen flex flex-col bg-slate-950">
-      {/* ─── Navigation ────────────────────────────────────────────────────── */}
+
       <nav className="border-b border-slate-800/50 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -24,7 +24,7 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      {/* ─── Hero Section ────────────────────────────────────────────────── */}
+
       <section className="relative py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-indigo-600/10 to-transparent opacity-50" />
         <div className="absolute inset-0 opacity-20 pointer-events-none" style={{
@@ -51,7 +51,7 @@ export default function LandingPage() {
             Built for precision and performance in education.
           </p>
 
-          {/* CTA Buttons */}
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <Link
               href="/register"
@@ -68,7 +68,7 @@ export default function LandingPage() {
             </Link>
           </div>
 
-          {/* Hero visual - Dashboard preview mockup */}
+
           <div className="relative mx-auto max-w-5xl">
             <div className="absolute inset-0 bg-gradient-to-b from-indigo-500/20 to-transparent rounded-2xl blur-3xl" />
             <div className="relative rounded-2xl border border-slate-700/50 bg-slate-900/50 backdrop-blur p-8 overflow-hidden">
@@ -92,7 +92,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ─── Stats Section ───────────────────────────────────────────────── */}
+
       <section className="py-20 border-y border-slate-800">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -113,7 +113,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ─── Features Section ─────────────────────────────────────────────── */}
+
       <section className="py-24">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
@@ -173,7 +173,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ─── CTA Section ────────────────────────────────────────────────── */}
+
       <section className="py-24 border-t border-slate-800">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-5xl font-bold text-white mb-6">
@@ -200,7 +200,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ─── Footer ───────────────────────────────────────────────────── */}
+
       <footer className="border-t border-slate-800 py-12">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
